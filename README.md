@@ -1,24 +1,55 @@
-# README
+# テーブル設計
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## users テーブル
 
-Things you may want to cover:
+| Column             | Type   | Options     |
+| ------------------ | ------ | ----------- |
+| nickname               | string | null: false |
+| email                  | string | null: false,unique: true |
+| encrypted_password     | string | null: false |
+| lastname               | string | null: false |
+| firstname              | string | null: false |
+| lastname_kana          | string | null: false |
+| firstname_kana         | string | null: false |
+| date_of_birth          | date   | null: false |
+- has_many :items
+- has_many :orders
 
-* Ruby version
+## items テーブル
 
-* System dependencies
+| Column | Type   | Options     |
+| ------ | ------ | ----------- |
+| name          | string | null: false |
+| explanation   | text   | null: false |
+| category_id      | integar| null: false |
+| price            | integar| null: false |
+| condition_id     | integar| null: false |
+| burden_id        | integar| null: false |
+| region_id        | integar| null: false |
+| shippment_days_id| integar| null: false |
+| user      | references | foreign_key: true,null: false |  
+- belongs_to :user
+- has_one :order
 
-* Configuration
+## orders テーブル
 
-* Database creation
+| Column | Type       | Options                        |     
+| ------ | ---------- | ------------------------------ |
+| user        | references | foreign_key: true,null: false |  
+| item        | references | foreign_key: true,null: false |
+- belongs_to :user
+- belongs_to :item
+- has_one :address
 
-* Database initialization
+## addresses テーブル
 
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+| Column  | Type       | Options                        |
+| ------- | ---------- | ------------------------------ |
+| post_number          | string | null: false |  
+| region_id            | integar| null: false |
+| municipalities       | string | null: false |
+| address              | string | null: false |  
+| building             | string |
+| phone_number         | string | null: false |  
+| order                | references | foreign_key: true,null: false | 
+- belongs_to :order
