@@ -5,8 +5,8 @@
 | Column             | Type   | Options     |
 | ------------------ | ------ | ----------- |
 | nickname               | string | null: false |
-| email                  | string | null: false |
-| password_confirmation  | string | null: false |
+| email                  | string | null: false,unique: true |
+| encrypted_password　  　| string | null: false |
 | lastname               | string | null: false |
 | firstname              | string | null: false |
 | lastname_kana          | string | null: false |
@@ -21,34 +21,34 @@
 | ------ | ------ | ----------- |
 | name          | string | null: false |
 | explanation   | text   | null: false |
-| category      | integar| null: false |
-| price         | integar| null: false |
-| condition     | integar| null: false |
-| burden        | integar| null: false |
-| region        | integar| null: false |
-| shippment_days| integar| null: false |
-| users_id      | references | foreign_key: true |  
+| category_id      | integar| null: false |
+| price_id         | integar| null: false |
+| condition_id     | integar| null: false |
+| burden_id        | integar| null: false |
+| region_id        | integar| null: false |
+| shippment_days_id| integar| null: false |
+| users      | references | foreign_key: true |  
 
-- belongs_to :users
-- has_one :orders
+- belongs_to :user
+- has_one :order
 ## orders テーブル
 
 | Column | Type       | Options                        |     
 | ------ | ---------- | ------------------------------ |
-| users_id         | references | foreign_key: true |  
-| items_id         | references | foreign_key: true |
-- belongs_to :users
-- belongs_to :items
-- has_one :adresses
+| users        | references | foreign_key: true |  
+| items        | references | foreign_key: true |
+- belongs_to :user
+- belongs_to :item
+- has_one :adress
 ## adresses テーブル
 
 | Column  | Type       | Options                        |
 | ------- | ---------- | ------------------------------ |
-| phost_number      　  | string | null: false |  
-| prefectures          | integar | null: false |
+| post_number      　  | string | null: false |  
+| prefecture_id          | integar | null: false |
 | municipalities       | string | null: false |
 | address              | string | null: false |  
-| building             | string | null: false |
+| building             | string |
 | phone_number      　　| string | null: false |  
-| orders_id      　　      | references | foreign_key: true | 
-- belongs_to :orders
+| orders      　　      | references | foreign_key: true | 
+- belongs_to :order
