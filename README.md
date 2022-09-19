@@ -6,7 +6,7 @@
 | ------------------ | ------ | ----------- |
 | nickname               | string | null: false |
 | email                  | string | null: false,unique: true |
-| encrypted_password　  　| string | null: false |
+| encrypted_password     | string | null: false |
 | lastname               | string | null: false |
 | firstname              | string | null: false |
 | lastname_kana          | string | null: false |
@@ -22,12 +22,12 @@
 | name          | string | null: false |
 | explanation   | text   | null: false |
 | category_id      | integar| null: false |
-| price            | string| null: false |
+| price            | integar| null: false |
 | condition_id     | integar| null: false |
 | burden_id        | integar| null: false |
 | region_id        | integar| null: false |
 | shippment_days_id| integar| null: false |
-| user      | references | foreign_key: true |  
+| user      | references | foreign_key: true,null: false |  
 - belongs_to :user
 - has_one :order
 
@@ -35,8 +35,8 @@
 
 | Column | Type       | Options                        |     
 | ------ | ---------- | ------------------------------ |
-| user        | references | foreign_key: true |  
-| item        | references | foreign_key: true |
+| user        | references | foreign_key: true,null: false |  
+| item        | references | foreign_key: true,null: false |
 - belongs_to :user
 - belongs_to :item
 - has_one :address
@@ -45,11 +45,11 @@
 
 | Column  | Type       | Options                        |
 | ------- | ---------- | ------------------------------ |
-| post_number      　  | string | null: false |  
+| post_number          | string | null: false |  
 | region_id            | integar| null: false |
 | municipalities       | string | null: false |
 | address              | string | null: false |  
 | building             | string |
-| phone_number      　　| string | null: false |  
-| order      　　       | references | foreign_key: true | 
+| phone_number         | string | null: false |  
+| order                | references | foreign_key: true,null: false | 
 - belongs_to :order
