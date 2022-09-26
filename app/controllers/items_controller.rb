@@ -18,7 +18,7 @@ class ItemsController < ApplicationController
   end
 
   def show
-    @items=Item.includes(:user).order("created_at DESC")
+    @item=Item.find(params[:id])
   end
 
   private
