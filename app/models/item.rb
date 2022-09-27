@@ -24,10 +24,8 @@ class Item < ApplicationRecord
   validates :name, presence: true
   validates :explanation, presence: true
 
-  validates :price, presence: true,format: { with: /\A[0-9]+\z/, message: "Half-width number" },numericality: { greater_than_or_equal_to: 300, less_than_or_equal_to: 9999999, message: "Out of setting range" }
-
-
-  
+  validates :price, presence: true, format: { with: /\A[0-9]+\z/, message: 'Half-width number' },
+                    numericality: { greater_than_or_equal_to: 300, less_than_or_equal_to: 9_999_999, message: 'Out of setting range' }
 
   has_one_attached :image
   belongs_to :user
@@ -35,6 +33,6 @@ class Item < ApplicationRecord
   private
 
   def item_params
-    params.require(:item).permit（:image）.merge(user_id: current_user.id)
+    params.require(:item).permit（ :image）.merge(user_id: current_user.id)
   end
 end
