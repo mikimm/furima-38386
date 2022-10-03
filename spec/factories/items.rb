@@ -7,7 +7,7 @@ FactoryBot.define do
     shippment_days_id { 4 }
     name                { '感謝' }
     explanation         { '感謝' }
-    price               { 12_345 }
+    price               { 12345 }
     association :user
     after(:build) do |item|
       item.image.attach(io: File.open('public/images/test_image.png'), filename: 'test_image.png')
