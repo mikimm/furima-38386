@@ -35,6 +35,11 @@ RSpec.describe OrderAddress, type: :model do
         @order_address.valid?
         expect(@order_address.errors.full_messages).to include("Region can't be blank")
       end
+      it '都道府県に「---」が選択されている場合は購入できない' do
+        @order_address.region_id = nil
+        @order_address.valid?
+        expect(@order_address.errors.full_messages).to include("Region can't be blank")
+      end
       it '市区町村が必須であること。' do
         @order_address.municipalities = ''
         @order_address.valid?
@@ -50,8 +55,18 @@ RSpec.describe OrderAddress, type: :model do
         @order_address.valid?
         expect(@order_address.errors.full_messages).to include("Phone number can't be blank", 'Phone number is invalid.')
       end
-      it '電話番号は、10桁以上11桁以内の半角数値のみ保存可能なこと（良い例:09012345678 良くない例:090-1234-5678)' do
-        @order_address.phone_number = '123456789234'
+      it '電話番号が9桁以下では購入できない' do
+        @order_address.phone_number = '123456789'
+        @order_address.valid?
+        expect(@order_address.errors.full_messages).to include('Phone number is invalid.')
+      end
+      it '電話番号が12桁以上では購入できない' do
+        @order_address.phone_number = '123456789123'
+        @order_address.valid?
+        expect(@order_address.errors.full_messages).to include('Phone number is invalid.')
+      end
+      it '電話番号に半角数字以外が含まれている場合は購入できない' do
+        @order_address.phone_number = '12345678@'
         @order_address.valid?
         expect(@order_address.errors.full_messages).to include('Phone number is invalid.')
       end
@@ -59,6 +74,16 @@ RSpec.describe OrderAddress, type: :model do
         @order_address.token = nil
         @order_address.valid?
         expect(@order_address.errors.full_messages).to include("Token can't be blank")
+      end
+      it 'userが紐付いていなければ購入できない' do
+        @order_address.user_id = ''
+        @order_address.valid?
+        expect(@order_address.errors.full_messages).to include("User can't be blank")
+      end
+      it 'itemが紐付いていなければ購入できない' do
+        @order_address.item_id= ''
+        @order_address.valid?
+        expect(@order_address.errors.full_messages).to include("Item can't be blank")
       end
     end
   end
