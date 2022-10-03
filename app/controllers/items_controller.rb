@@ -20,7 +20,6 @@ class ItemsController < ApplicationController
   end
 
   def show
-
   end
 
   def edit
@@ -50,11 +49,7 @@ class ItemsController < ApplicationController
   end
 
   def set_item_id
-     if @item.user != current_user 
-      redirect_to root_path
-     end
-     if @item.order.present?
-      redirect_to root_path
-    end
+    redirect_to root_path if @item.user != current_user
+    redirect_to root_path if @item.order.present?
   end
 end
