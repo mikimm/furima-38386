@@ -22,8 +22,7 @@ RSpec.describe OrderAddress, type: :model do
       it '郵便番号が必須であること。' do
         @order_address.post_number = ''
         @order_address.valid?
-        expect(@order_address.errors.full_messages).to include("Post number can't be blank",
-                                                               'Post number is invalid. Include hyphen(-)')
+        expect(@order_address.errors.full_messages).to include("Post number can't be blank")
       end
       it ' 郵便番号は、「3桁ハイフン4桁」の半角文字列のみ保存可能なこと（良い例:123-4567 良くない例:1234567）。' do
         @order_address.post_number = '1234567'
@@ -31,9 +30,9 @@ RSpec.describe OrderAddress, type: :model do
         expect(@order_address.errors.full_messages).to include('Post number is invalid. Include hyphen(-)')
       end
       it '都道府県が必須であること。' do
-        @order_address.region_id = ''
+        @order_address.region_id = 1
         @order_address.valid?
-        expect(@order_address.errors.full_messages).to include("Region can't be blank")
+        expect(@order_address.errors.full_messages).to include("Region must be other than 1")
       end
       it '都道府県に「---」が選択されている場合は購入できない' do
         @order_address.region_id = nil
@@ -53,7 +52,7 @@ RSpec.describe OrderAddress, type: :model do
       it '電話番号が必須であること。' do
         @order_address.phone_number = ''
         @order_address.valid?
-        expect(@order_address.errors.full_messages).to include("Phone number can't be blank", 'Phone number is invalid.')
+        expect(@order_address.errors.full_messages).to include("Phone number can't be blank")
       end
       it '電話番号が9桁以下では購入できない' do
         @order_address.phone_number = '123456789'

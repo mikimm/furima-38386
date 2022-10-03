@@ -1,7 +1,7 @@
 FactoryBot.define do
   factory :order_address do
     post_number { '157-0076' }
-    region_id { 5 }
+    region_id {4}
     municipalities { '北区' }
     address { '青山1-1-1' }
     building { '牧野ビル' }
