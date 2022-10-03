@@ -24,15 +24,16 @@
     </div>
 
 <% if user_signed_in? %>
-    <% if current_user.id == @item.user_id %>
+  <% if current_user.id == @item.user_id %>
     <%= link_to "商品の編集", edit_item_path(@item.id), method: :get, class: "item-red-btn" %>
     <p class="or-text">or</p>
     <%= link_to "削除","/items/#{@item.id}", method: :delete, class:"item-destroy" %>
-    <% end %>
+    <% else %>
     <% unless @item.order.present?%>
     <%= link_to "購入画面に進む", item_orders_path(@item.id) ,class:"item-red-btn"%>
+    <% end %>
    <% end %>
- <% end %>
+<% end %>
 
     <div class="item-explain-box">
       <span><%= @item.explanation%></span>
@@ -41,7 +42,7 @@
       <tbody>
         <tr>
           <th class="detail-item">出品者</th>
-          <td class="detail-value"><%= @item.name %></td>
+          <td class="detail-value"><%= @item.user.nickname %></td>
         </tr>
         <tr>
           <th class="detail-item">カテゴリー</th>
