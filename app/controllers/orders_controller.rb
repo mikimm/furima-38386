@@ -3,14 +3,11 @@ class OrdersController < ApplicationController
   before_action :set_item, only: [:index, :create]
   def index
     @order_address = OrderAddress.new
-    redirect_to root_path if @item.user_id == current_user.id || @item.id == @order_address
+    redirect_to root_path if @item.user_id == current_user.id || @item.order.present?
   end
 
   def create
     @order_address = OrderAddress.new(order_address_params)
-    if @item.id == @order.item_id
-      redirect_to root_path
-    end
     if @order_address.valid?
       pay_item
       @order_address.save
