@@ -10,6 +10,8 @@ class CreateItems < ActiveRecord::Migration[6.0]
   t.integer :region_id,null: false 
   t.integer :shippment_days_id,null: false 
   t.references :user,foreign_key: true,null: false
+
+
    t.timestamps
     end
   end
