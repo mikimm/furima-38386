@@ -4,11 +4,11 @@ class OrderAddress
                 :token
 
   with_options presence: true do
-    validates :post_number, format: { with: /\A[0-9]{3}-[0-9]{4}\z/, message: 'is invalid. Include hyphen(-)' }
+    validates :post_number, format: { with: /\A[0-9]{3}-[0-9]{4}\z/, message: 'が無効です-を入力してください' }
     validates :region_id, numericality: { other_than: 1 }
     validates :municipalities
     validates :address
-    validates :phone_number, format: { with: /\A\d{10,11}\z/, message: 'is invalid.' }
+    validates :phone_number, format: { with: /\A\d{10,11}\z/, message: 'が無効です' }
     validates :user_id
     validates :item_id
     validates :token

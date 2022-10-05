@@ -27,7 +27,7 @@ RSpec.describe OrderAddress, type: :model do
       it ' 郵便番号は、「3桁ハイフン4桁」の半角文字列のみ保存可能なこと（良い例:123-4567 良くない例:1234567）。' do
         @order_address.post_number = '1234567'
         @order_address.valid?
-        expect(@order_address.errors.full_messages).to include('Post number is invalid. Include hyphen(-)')
+        expect(@order_address.errors.full_messages).to include('Post number が無効です-を入力してください')
       end
       it '都道府県が必須であること。' do
         @order_address.region_id = 1
@@ -57,17 +57,17 @@ RSpec.describe OrderAddress, type: :model do
       it '電話番号が9桁以下では購入できない' do
         @order_address.phone_number = '123456789'
         @order_address.valid?
-        expect(@order_address.errors.full_messages).to include('Phone number is invalid.')
+        expect(@order_address.errors.full_messages).to include('Phone number が無効です')
       end
       it '電話番号が12桁以上では購入できない' do
         @order_address.phone_number = '123456789123'
         @order_address.valid?
-        expect(@order_address.errors.full_messages).to include('Phone number is invalid.')
+        expect(@order_address.errors.full_messages).to include('Phone number が無効です')
       end
       it '電話番号に半角数字以外が含まれている場合は購入できない' do
         @order_address.phone_number = '12345678@'
         @order_address.valid?
-        expect(@order_address.errors.full_messages).to include('Phone number is invalid.')
+        expect(@order_address.errors.full_messages).to include('Phone number が無効です')
       end
       it 'tokenが空では登録できないこと' do
         @order_address.token = nil
